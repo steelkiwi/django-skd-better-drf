@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name="django-skd-better-drf",
-    version="0.0.3.4",
+    version="0.0.4",
     author="Steelkiwi",
     author_email="dobrovolsky@steelkiwi.com",  # temp
     url="https://github.com/steelkiwi/django-skd-better-drf",
