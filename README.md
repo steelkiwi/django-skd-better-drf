@@ -3,11 +3,17 @@
 ##### Better time
 Specify this parameters in your REST_FRAMEWORK settings.py:
 `'DATETIME_FORMAT': '%d.%m.%Y %H:%M:%S %z'`,
+
 `'DATETIME_INPUT_FORMATS': ['%d.%m.%Y %H:%M:%S %z']`,
+
 `'DATE_FORMAT': '%d.%m.%Y'`,
+
 `'DATE_INPUT_FORMATS': ['%d.%m.%Y']`,
+
 `'TIME_FORMAT': '%H:%M:%S'`,
+
 `'TIME_INPUT_FORMATS': ['%H:%M:%S']`.
+
 ##### FixFiledMixin
 ###### models.py
 ```python
