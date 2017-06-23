@@ -1,3 +1,7 @@
+from django.db import models
+from django.contrib.gis.db.models import PointField as PointFieldModel
+
+
 from rest_framework.fields import (
     BooleanField, CharField, ChoiceField, DateField, DateTimeField,
     DecimalField, DictField, DurationField, EmailField, Field, FileField,
@@ -8,8 +12,11 @@ from rest_framework.fields import (
 )
 
 
+from skd_better_drf.fields import PointField
+
+
 class FixFiledMixin:
-	serializer_field_mapping = {
+    serializer_field_mapping = {
         models.AutoField: IntegerField,
         models.BigIntegerField: IntegerField,
         models.BooleanField: BooleanField,
@@ -20,9 +27,9 @@ class FixFiledMixin:
         models.DecimalField: DecimalField,
         models.EmailField: EmailField,
         models.Field: ModelField,
-        models.FileField: FileFieldWithoutNone,
+        models.FileField: FileField,
         models.FloatField: FloatField,
-        models.ImageField: ImageFieldWithoutNone,
+        models.ImageField: ImageField,
         models.IntegerField: IntegerField,
         models.NullBooleanField: NullBooleanField,
         models.PositiveIntegerField: IntegerField,
@@ -34,4 +41,16 @@ class FixFiledMixin:
         models.URLField: URLField,
         models.GenericIPAddressField: IPAddressField,
         models.FilePathField: FilePathField,
+        PointFieldModel: PointField,
     }
+
+    def __init__(self, *args, **kwargs):
+        """Helper for Pycharm syntax checker"""
+        super().__init__(*args, **kwargs)
+
+    def to_representation(self, value):
+        obj = super().to_representation(value)
+        for key in obj:
+            if obj[key] == '':
+                obj[key] = None
+        return obj
