@@ -2,13 +2,11 @@ import json
 
 from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.geos.error import GEOSException
-from django.utils.encoding import smart_str
 from django.utils import six
 from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import serializers
 
-from mixins import EmpyUrlMixin
 
 EMPTY_VALUES = (None, '', [], (), {})
 
@@ -65,23 +63,7 @@ class PointField(serializers.Field):
 
         if isinstance(value, GEOSGeometry):
             value = {
-                "latitude": smart_str(value.y),
-                "longitude": smart_str(value.x)
+                "latitude": value.y,
+                "longitude": value.x
             }
         return value
-
-
-class EmpyUrlMixin:
-    def to_representation(self, value):
-        value = super().to_representation()
-        if value is None:
-            value = ''
-        return value
-
-
-class FileFieldWithoutNone(EmpyUrlMixin, serializers.FileField):
-    pass
-
-
-class ImageFieldWithoutNone(EmpyUrlMixin, serializers.ImageField):
-    pass
