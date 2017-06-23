@@ -30,6 +30,7 @@ Response example:
 }
 ```
 ##### NonePagination
+###### views.py
 ```python
 class CityModelViewSet(ModelViewSet):
     serializer_class = CitySerializer
@@ -37,6 +38,12 @@ class CityModelViewSet(ModelViewSet):
 
     def get_queryset(self):
         return City.objects.all()
+```
+###### urls.py
+```python
+urlpatterns = [
+    url(r'^city/$', CityModelViewSet.as_view({'get': 'list'}), name='city'),
+]
 ```
 Response example:
 ```javascript
