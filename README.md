@@ -2,6 +2,7 @@
 #### How to use:
 ##### Better time
 Specify this parameters in your REST_FRAMEWORK settings.py:
+
 `'DATETIME_FORMAT': '%d.%m.%Y %H:%M:%S %z'`,
 
 `'DATETIME_INPUT_FORMATS': ['%d.%m.%Y %H:%M:%S %z']`,
