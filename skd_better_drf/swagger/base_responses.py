@@ -173,6 +173,10 @@ def _check_item(item_schema, item_response):
         raise ValueError('item_schema should be dict')
     if not item_response and not isinstance(item_response, dict):
         raise ValueError('item_schema should be dict')
+    if item_response:
+        for k, v in item_response.items():
+            if v is None:
+                raise ValueError('swagger does not support null. Use item_schema or remove None in {}'.format(k))
 
 
 def _get_results(item_schema, item_response) -> dict:
