@@ -106,20 +106,81 @@ RESPONSES = {
 }
 
 
-def get_none_pagination_response(item):
-    if not isinstance(item, dict):
-        raise ValueError('Should be dict')
+def get_none_pagination_response(item_schema=None, item_response=None) -> dict:
+    """
+    This method allows to get pagination response with item_schema or item_response for none pagination.
+    
+    :param item_schema: Is json schema 
+    :param item_response: Is example of json object response
+    :return:
+    """
+    _check_item(item_schema, item_response)
     return {
         "200": {
             "description": "",
             'schema': {
                 "type": "object",
                 "properties": {
-                    "results": {
-                        "type": "array",
-                        "items": item
-                    }
+                    "results": _get_results(item_schema, item_response)
                 }
             }
         }
     }
+
+
+def get_pagination_response(item_schema=None, item_response=None) -> dict:
+    """
+    This method allows to get pagination response with item_schema or item_response.
+
+    :param item_schema: Is json schema 
+    :param item_response: Is example of json object response
+    :return:
+    """
+    _check_item(item_schema, item_response)
+    return {
+        "200": {
+            "description": "",
+            'schema': {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "number",
+                        "example": 1
+                    },
+                    "next": {
+                        "type": ["boolean", "null"],
+                        "example": False
+                    },
+                    "previous": {
+                        "type": ["boolean", "null"],
+                        "example": False
+                    },
+                    "results": _get_results(item_schema, item_response)
+                }
+            }
+        }
+    }
+
+
+def _check_item(item_schema, item_response):
+    if item_schema is None:
+        item_schema = {}
+    if item_response is None:
+        item_response = {}
+    if not item_schema and not item_response:
+        raise ValueError('you should specify item_schema or item_response')
+    if not item_schema and not isinstance(item_schema, dict):
+        raise ValueError('item_schema should be dict')
+    if not item_response and not isinstance(item_response, dict):
+        raise ValueError('item_schema should be dict')
+
+
+def _get_results(item_schema, item_response) -> dict:
+    results = {
+            "type": "array",
+    }
+    if item_response:
+        results["example"] = [item_response]
+    else:
+        results["items"] = item_schema
+    return results

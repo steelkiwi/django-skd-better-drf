@@ -77,7 +77,8 @@ Response example:
 }
 ```
 ##### Swagger doc
-You would specify responses_docs in view using dict. Read more about [json schema](http://json-schema.org/documentation.html).
+You would specify `responses_docs` in view using dict. Read more about [json schema](https://swagger.io/specification/).
+Also you can use `parameters_docs` in view for parameters.
 
 `skd_better_drf.swagger.base_responses` contains base responses and response for NonePagination.
 
