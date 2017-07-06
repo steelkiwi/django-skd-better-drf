@@ -181,7 +181,7 @@ def _check_item(item_schema, item_response):
 
 def _get_results(item_schema, item_response) -> dict:
     results = {
-            "type": "array",
+        "type": "array",
     }
     if item_response:
         results["example"] = [item_response]

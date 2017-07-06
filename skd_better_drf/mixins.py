@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.gis.db.models import PointField as PointFieldModel
 
-
 from rest_framework.fields import (
     BooleanField, CharField, ChoiceField, DateField, DateTimeField,
     DecimalField, DictField, DurationField, EmailField, Field, FileField,
@@ -10,7 +9,6 @@ from rest_framework.fields import (
     NullBooleanField, ReadOnlyField, RegexField, SerializerMethodField,
     SlugField, TimeField, URLField, UUIDField,
 )
-
 
 from skd_better_drf.fields import PointField
 

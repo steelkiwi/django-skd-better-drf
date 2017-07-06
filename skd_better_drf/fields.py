@@ -7,7 +7,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import serializers
 
-
 EMPTY_VALUES = (None, '', [], (), {})
 
 
@@ -49,7 +48,7 @@ class PointField(serializers.Field):
                 return GEOSGeometry('POINT(%(longitude)s %(latitude)s)' % {
                     "longitude": longitude,
                     "latitude": latitude}
-                )
+                                    )
             except (GEOSException, ValueError):
                 self.fail('invalid')
         self.fail('invalid')

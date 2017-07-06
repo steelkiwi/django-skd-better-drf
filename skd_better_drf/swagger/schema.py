@@ -2,7 +2,6 @@ from rest_framework.schemas import SchemaGenerator
 
 
 class SchemaGenerator(SchemaGenerator):
-
     def get_link(self, path, method, view):
         data_link = super(SchemaGenerator, self).get_link(path, method, view)
 
