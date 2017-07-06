@@ -1,6 +1,7 @@
 from collections import OrderedDict
 from coreapi.compat import urlparse
 from openapi_codec.utils import get_method, get_encoding, get_links_from_document
+from openapi_codec import encode
 
 
 class AbstractCodec:
@@ -66,6 +67,9 @@ class AbstractCodec:
                 link._responses_docs
             )
 
+        # if link._responses_docs is not dict execute base _get_responses
+        return encode._get_responses()
+
     def _get_parameters(self, link, encoding):
         if isinstance(link._parameters_docs, dict):
             parameters_doc = link._parameters_docs.get(
@@ -77,6 +81,9 @@ class AbstractCodec:
             for prameter in parameters_doc:
                 params.append(prameter)
             return params
+
+        # if link._responses_docs is not dict execute base _get_parameters
+        return encode._get_parameters()
 
     def _get_links(self, document):
         """
