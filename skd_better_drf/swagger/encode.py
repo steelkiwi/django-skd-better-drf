@@ -68,7 +68,7 @@ class AbstractCodec:
             )
 
         # if link._responses_docs is not dict execute base _get_responses
-        return encode._get_responses()
+        return encode._get_responses(link)
 
     def _get_parameters(self, link, encoding):
         if isinstance(link._parameters_docs, dict):
@@ -78,12 +78,12 @@ class AbstractCodec:
             parameters_doc = None
         if parameters_doc is not None:
             params = []
-            for prameter in parameters_doc:
-                params.append(prameter)
+            for parameter in parameters_doc:
+                params.append(parameter)
             return params
 
         # if link._responses_docs is not dict execute base _get_parameters
-        return encode._get_parameters()
+        return encode._get_parameters(link, encoding)
 
     def _get_links(self, document):
         """
