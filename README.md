@@ -120,4 +120,3 @@ urlpatterns = [
     url(r'^docs/$', get_swagger_view(title='Pastebin API')),
 ]
 ````
-###### view.py

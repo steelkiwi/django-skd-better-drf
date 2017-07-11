@@ -7,6 +7,7 @@ class SchemaGenerator(SchemaGenerator):
 
         data_link._responses_docs = self.get_response_docs(path, method, view)
         data_link._parameters_docs = self.get_parameters_docs(path, method, view)
+        data_link._view_method = view.action
 
         return data_link
 
