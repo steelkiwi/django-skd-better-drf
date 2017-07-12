@@ -80,11 +80,15 @@ Response example:
 You would specify `responses_docs` in view using dict. Read more about [json schema](https://swagger.io/specification/).
 Also you can use `parameters_docs` in view for parameters.
 
+**But you should use name of mapped functions by default
+(`list`, `retrieve`, `create`, `update`, `partial_update`, `destroy`)
+or map your own instead standard `get`, `post`, `put`, `patch`, `delete`.**
+
 `skd_better_drf.swagger.base_responses` contains base responses and response for NonePagination.
 
 ```python
        responses_docs = {
-        'get': {
+        'retrieve': {
             '200': {
                 'description': 'Success! Instance successfully received',
                 'schema': {
