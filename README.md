@@ -84,14 +84,15 @@ Also you can use `parameters_docs` in view for parameters.
 (`list`, `retrieve`, `create`, `update`, `partial_update`, `destroy`)
 or map your own or standard `get`, `post`, `put`, `patch`, `delete`.**
 
+
 `skd_better_drf.swagger.base_responses` contains base responses and response for NonePagination.
 
 ```python
        responses_docs = {
-        'retrieve': {
-            '200': {
-                'description': 'Success! Instance successfully received',
-                'schema': {
+        "retrieve": {
+            "200": {
+                "description": "Success! Instance successfully received",
+                "schema": {
                     "title": "Person",
                     "type": "object",
                     "properties": {
@@ -113,6 +114,24 @@ or map your own or standard `get`, `post`, `put`, `patch`, `delete`.**
                     "required": ["firstName", "lastName"]
                 }
             },
+        },
+        "custom_list": {
+            "200": {
+                "type": "object",
+                "description": "parse error",
+                "schema": {
+                    "properties": {
+                        "filter_letter": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "description": "",
+                                "example": "This field is required.",
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 ```
