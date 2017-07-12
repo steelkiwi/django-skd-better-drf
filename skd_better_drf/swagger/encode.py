@@ -62,18 +62,24 @@ class AbstractCodec:
 
     def _get_responses(self, link):
         if isinstance(link._responses_docs, dict):
-            return link._responses_docs.get(
-                '{}'.format(link._view_method),
-                link._responses_docs
-            )
+            responses = link._responses_docs.get('{}'.format(link._view_method))
+            if responses:
+                return responses
+            else:
+                return link._responses_docs.get(
+                    '{}'.format(link.action),
+                    link._responses_docs
+                )
 
         # if link._responses_docs is not dict execute base _get_responses
         return encode._get_responses(link)
 
     def _get_parameters(self, link, encoding):
         if isinstance(link._parameters_docs, dict):
-            parameters_doc = link._parameters_docs.get(
-                '{}'.format(link._view_method), None)
+            parameters_doc = link._responses_docs.get('{}'.format(link._view_method))
+            if not parameters_doc:
+                parameters_doc = link._parameters_docs.get(
+                    '{}'.format(link.action), None)
         else:
             parameters_doc = None
         if parameters_doc is not None:
