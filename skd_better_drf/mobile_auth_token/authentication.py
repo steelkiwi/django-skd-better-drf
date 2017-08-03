@@ -18,21 +18,18 @@ class MobileTokenAuthentication(BaseAuthentication):
     def authenticate(self, request):
         token, device_id = self.get_headers_values(request)
 
-        if len(token) < 2:
+        if not token or token[0].lower() != self.KEYWORD.lower():
+            return None
+
+        if not device_id:
+            return None
+
+        if len(token) == 1:
             msg = _('Invalid token header. No credentials provided.')
             raise exceptions.AuthenticationFailed(msg)
         elif len(token) > 2:
             msg = _('Invalid token header. Token string should not contain spaces.')
             raise exceptions.AuthenticationFailed(msg)
-
-        token_keyword = token[0]
-        token_value = token[1]
-
-        if not token_keyword or token_keyword.lower() != self.KEYWORD.lower():
-            return None
-
-        if not device_id:
-            return None
 
         try:
             uuid.UUID(device_id)
@@ -40,7 +37,7 @@ class MobileTokenAuthentication(BaseAuthentication):
             msg = _('Invalid device id. Id should be a uuid.')
             raise exceptions.AuthenticationFailed(msg)
 
-        return self.authenticate_credentials(token_value, device_id)
+        return self.authenticate_credentials(token[1], device_id)
 
     def get_model(self):
         if self.model is not None:
@@ -51,12 +48,9 @@ class MobileTokenAuthentication(BaseAuthentication):
     def authenticate_credentials(self, token, device_id):
         model = self.get_model()
         try:
-            token = model.objects.select_related('user').get(key=token)
+            token = model.objects.select_related('user').get(key=token, devices__device_id=device_id)
         except model.DoesNotExist:
             raise exceptions.AuthenticationFailed(_('Invalid token.'))
-
-        if not token.devices.filter(device_id=device_id).exists():
-            raise exceptions.AuthenticationFailed(_('Invalid device'))
 
         if not token.user.is_active:
             raise exceptions.AuthenticationFailed(_('User inactive or deleted.'))
