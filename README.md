@@ -143,3 +143,29 @@ urlpatterns = [
     url(r'^docs/$', get_swagger_view(title='Pastebin API')),
 ]
 ````
+##### Mobile token auth
+Provides authentication backend and device model for authorization by token from mobile phones.
+For using backend you should add class to setting and create model device from abstract Device model. 
+###### settings.py
+```python 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'skd_better_drf.mobile_auth_token.authentication.MobileTokenAuthentication',
+    ),
+}
+```
+###### models.py
+```python
+from skd_better_drf.mobile_auth_token.models import Device as BaseDevice
+ 
+class Device(BaseDevice):
+    pass
+```
+You can add additional fields and methods to your Device model.
+Header name should be `Authorization` and `Device-id` for token and device id accordingly.  
+
+Example:
+```bash
+http :8000/user/ Authorization:'Token 6df0cfb73a45353ab78cc69088fd32d392042b05' \
+ Device-id:22bc4a64-783e-11e7-b5a5-be2e44b06b34
+```
