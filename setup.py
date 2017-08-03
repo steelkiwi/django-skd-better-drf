@@ -10,7 +10,7 @@ setuptools.setup(
     license="MIT",
     description="Steelkiwi Django Tools for DRF",
     keywords="django tools helpers",
-    packages=["skd_better_drf", "skd_better_drf.swagger"],
+    packages=["skd_better_drf", "skd_better_drf.swagger", "skd_better_drf.mobile_auth_token"],
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
