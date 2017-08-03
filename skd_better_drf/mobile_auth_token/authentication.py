@@ -17,20 +17,22 @@ class MobileTokenAuthentication(BaseAuthentication):
 
     def authenticate(self, request):
         token, device_id = self.get_headers_values(request)
-        token_keyword = token[0]
-        token_value = token[1]
-        if not token_keyword or token_keyword.lower() != self.KEYWORD.lower():
-            return None
 
-        if not device_id:
-            return None
-
-        if len(token) == 1:
+        if len(token) < 2:
             msg = _('Invalid token header. No credentials provided.')
             raise exceptions.AuthenticationFailed(msg)
         elif len(token) > 2:
             msg = _('Invalid token header. Token string should not contain spaces.')
             raise exceptions.AuthenticationFailed(msg)
+
+        token_keyword = token[0]
+        token_value = token[1]
+
+        if not token_keyword or token_keyword.lower() != self.KEYWORD.lower():
+            return None
+
+        if not device_id:
+            return None
 
         try:
             uuid.UUID(device_id)
