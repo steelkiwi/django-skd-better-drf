@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_swagger import renderers
 
-from skd_better_drf.swagger.schema import SchemaGenerator
-from skd_better_drf.swagger.renderers import OpenAPIRenderer
+from drf_skd_tools.swagger.schema import SchemaGenerator
+from drf_skd_tools.swagger.renderers import OpenAPIRenderer
 
 
 def get_swagger_view(title=None, url=None, patterns=None, urlconf=None):

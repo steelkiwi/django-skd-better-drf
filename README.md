@@ -1,21 +1,12 @@
 ## Simple library for DRF
 #### How to use:
-##### Better time
-Specify this parameters in your REST_FRAMEWORK settings.py:
-
-`'DATETIME_FORMAT': '%d.%m.%Y %H:%M:%S %z'`,
-
-`'DATETIME_INPUT_FORMATS': ['%d.%m.%Y %H:%M:%S %z']`,
-
-`'DATE_FORMAT': '%d.%m.%Y'`,
-
-`'DATE_INPUT_FORMATS': ['%d.%m.%Y']`,
-
-`'TIME_FORMAT': '%H:%M:%S'`,
-
-`'TIME_INPUT_FORMATS': ['%H:%M:%S']`.
-
 ##### FixFiledMixin
+Миксин реализует замену `PointField` и  пустых строк на объект `null`. 
+Поскольку поле может содержать атрибут `null=True` значения могут возвращаться как `'''` или `null`, что приводит
+к некоторым трудностям при разработке приложений под мобильные платформы с использованием статически типизированых 
+языков програмирования.
+`PointField` возвращает человекочитаемое отображения координат (смотрите ниже). Исключает путаницу с значениями 
+`latitude` и `longitude`.
 ###### models.py
 ```python
 class City(models.Model):
@@ -45,6 +36,9 @@ Response example:
 }
 ```
 ##### NonePagination
+`NonePagination` позволяет отключить пагинацию не нарушив работу существующего кода на фронт-энде, также 
+При использовании `pagination_class = None` в ответ приходит массив без ключа, что создает проблемы при обработке
+с использованием статически типизированых языков.
 ###### views.py
 ```python
 class CityModelViewSet(ModelViewSet):

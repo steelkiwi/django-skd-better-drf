@@ -7,7 +7,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework_swagger.renderers import OpenAPIRenderer, OpenAPICodec
 from rest_framework_swagger.settings import swagger_settings
 
-from skd_better_drf.swagger.encode import AbstractCodec
+from drf_skd_tools.swagger.encode import AbstractCodec
 
 
 class OpenAPICodec(AbstractCodec, OpenAPICodec):
