@@ -2,15 +2,15 @@ import setuptools
 
 
 setuptools.setup(
-    name="django-skd-better-drf",
+    name="drf-skd-tools",
     version="0.1.0",
     author="Steelkiwi",
     author_email="dobrovolsky@steelkiwi.com",  # temp
-    url="https://github.com/steelkiwi/django-skd-better-drf",
+    url="https://github.com/steelkiwi/drf-skd-tools",
     license="MIT",
     description="Steelkiwi Django Tools for DRF",
     keywords="django tools helpers",
-    packages=["skd_better_drf", "skd_better_drf.swagger"],
+    packages=["drf_skd_tools", "drf_skd_tools.swagger"],
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',

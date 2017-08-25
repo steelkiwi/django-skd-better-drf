@@ -10,7 +10,7 @@ from rest_framework.fields import (
     SlugField, TimeField, URLField, UUIDField,
 )
 
-from skd_better_drf.fields import PointField
+from drf_skd_tools.fields import PointField
 
 
 class FixFiledMixin:
