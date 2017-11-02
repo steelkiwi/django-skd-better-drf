@@ -61,7 +61,7 @@ class AbstractCodec:
         return operation
 
     def _get_responses(self, link):
-        if isinstance(link._responses_docs, dict):
+        if hasattr(link, '_responses_docs') and isinstance(link._responses_docs, dict):
             responses = link._responses_docs.get('{}'.format(link._view_method))
             if responses:
                 return responses
@@ -75,7 +75,7 @@ class AbstractCodec:
         return encode._get_responses(link)
 
     def _get_parameters(self, link, encoding):
-        if isinstance(link._parameters_docs, dict):
+        if hasattr(link, '_parameters_docs') and isinstance(link._parameters_docs, dict):
             parameters_doc = link._parameters_docs.get('{}'.format(link._view_method))
             if not parameters_doc:
                 parameters_doc = link._parameters_docs.get(
