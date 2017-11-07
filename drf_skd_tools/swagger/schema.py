@@ -7,8 +7,8 @@ class SchemaGenerator(SG):
         super().__init__(*args, **kwargs)
         
 
-    def get_link(self, path, method, view):
-        data_link = super().get_link(path, method, view)
+    def get_links(self, path, method, view):
+        data_link = super().get_links(path, method, view)
 
         data_link._responses_docs = self.get_response_docs(path, method, view)
         data_link._parameters_docs = self.get_parameters_docs(path, method, view)
