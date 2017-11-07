@@ -5,10 +5,6 @@ class SchemaGenerator(SG):
     def __init__(self, *args, **kwargs):
         print('test data')
         super().__init__(*args, **kwargs)
-
-    def get_schema(self, request=None, public=False):
-        print('test get_schema')
-        return super().__init__(request, public)
         
 
     def get_link(self, path, method, view):
