@@ -21,7 +21,8 @@ By default, our view uses default swagger schema generator. If you want to use J
 We include the mapping for HTTP methods (`get`, `post`, `put`, `patch`, `delete`) or ViewSet actions (`list`, `retrieve`, `create`, `update`, `partial_update`, `destroy`)
 or map your own or standard `get`, `post`, `put`, `patch`, `delete`.**
 
-Start from django rest framework version 3.7 you should use `BaseJsonSchema` as mixin for your view.  
+Start from django rest framework version 3.7 you should use `BaseJsonSchema` as mixin for your view, `from drf_skd_tools.swagger.schema_views import BaseJsonSchema`.  
+
 
 #### Response Example
 
