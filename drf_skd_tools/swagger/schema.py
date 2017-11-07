@@ -1,7 +1,12 @@
-from rest_framework.schemas import SchemaGenerator
+from rest_framework.schemas import SchemaGenerator as SG
 
 
-class SchemaGenerator(SchemaGenerator):
+class SchemaGenerator(SG):
+    def __init__(self, *args, **kwargs):
+        print('test data')
+        super().__init__(*args, **kwargs)
+
+
     def get_link(self, path, method, view):
         data_link = super(SchemaGenerator, self).get_link(path, method, view)
 
