@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name="drf-skd-tools",
-    version="0.1.1",
+    version="0.1.2",
     author="Steelkiwi",
     author_email="dobrovolsky@steelkiwi.com",  # temp
     url="https://github.com/steelkiwi/drf-skd-tools",
