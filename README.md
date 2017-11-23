@@ -1,4 +1,6 @@
 ## Simple library for DRF
+1) Provide additional fields `TimestampField` and `PointField`,
+2) Provide  swagger doc.
 #### How to use:
 
 ##### Swagger docs

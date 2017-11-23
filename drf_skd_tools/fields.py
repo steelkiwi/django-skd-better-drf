@@ -1,5 +1,6 @@
 import json
 
+from datetime import datetime
 from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.geos.error import GEOSException
 from django.utils import six
@@ -66,3 +67,27 @@ class PointField(serializers.Field):
                 "longitude": value.x
             }
         return value
+
+
+class TimestampField(serializers.Field):
+    default_error_messages = {
+        'invalid': _('Should be an integer.'),
+    }
+
+    def to_internal_value(self, value):
+        if value in EMPTY_VALUES and not self.required:
+            return None
+
+        try:
+            int_value = int(value)
+        except ValueError:
+            self.fail('invalid')
+        return datetime.fromtimestamp(int_value)
+
+    def to_representation(self, value):
+        if value is None:
+            return value
+
+        assert isinstance(value, datetime), 'Expected a `datetime`'
+
+        return int(value.timestamp())
